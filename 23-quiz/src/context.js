@@ -75,12 +75,17 @@ const AppProvider = ({ children }) => {
     setIsModalOpen(false)
   }
 
-
   const handleChange = (e) => {
-    console.log(e);
+    const name = e.target.name;
+    const value = e.target.value;
+    console.log(name, value);
+    setQuiz({...quiz, [name]: value})
   }
    const handleSubmit = (e) => {
     e.preventDefault();
+    const {amount,category,difficulty} = quiz;
+    const url = `${API_ENDPOINT}amount=${amount}&category=${table[category]}&difficulty=${difficulty}&type=multiple`;
+    fetchQuestions(url);
   }
 
   return (
